@@ -10,3 +10,12 @@ def main():
 
 
 main()
+
+# Varianta 1
+# print(input("String: ")).lower())
+
+# Varianta 2
+# x = get_input()
+
+# def get_input()
+#     return input("String: ")
