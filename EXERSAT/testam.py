@@ -7,5 +7,5 @@ def tower_of_hanoi(n, source, auxiliary, target):
     tower_of_hanoi(n-1, auxiliary, source, target)
 
 
-n = 18
+n = 8
 tower_of_hanoi(n, 'A', 'B', 'C')
