@@ -231,14 +231,14 @@ function attack() {
 	if (health <= 0) {
 		lose();
 	} else if (monsterHealth <= 0) {
-		defeatMonster();
+		if (fighting === 2) {
+			winGame();
+		  } else {
+			defeatMonster();
+		  }
 	}
 
-  if (fighting === 2) {
-    winGame();
-  } else {
-    defeatMonster();
-  }
+  
 
   if (Math.random() <= .1 && inventory.length !== 1) {
     text.innerText += " Your " + inventory.pop() + " breaks.";
