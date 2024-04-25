@@ -1,0 +1,40 @@
+@media only screen and (max-width: 767px) {
+    .hero {
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
+
+    .steps {
+        flex-wrap: wrap;
+        gap: 2em;
+    }
+
+    .step {
+        width: 100%;
+    }
+
+    .product-list .product {
+        width: 100%;
+    }
+
+    .product-list {
+        flex-wrap: wrap;
+    }
+
+    .garden {
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
+
+    .garden-content .title {
+        padding-top: 20px;
+    }
+
+    .garden>div { 
+        width: 95%;
+    }
+
+    .garden-content {
+        padding: 0;
+    }
+}
