@@ -1,21 +1,26 @@
-let xp = 0;
-let health = 100;
-let gold = 50;
-let currentWeapon = 0;
-let fighting;
-let monsterHealth;
-let inventory = ["stick"];
+// Variabile
+let xp = 0; // Experiența jucătorului
+let health = 100; // Punctele de viață ale jucătorului
+let gold = 50; // Aurul jucătorului
+let currentWeapon = 0; // Indexul armelor curente în array-ul de arme
+let fighting; // Indexul monștrului cu care se luptă în prezent
+let monsterHealth; // Viața monștrului cu care se luptă în prezent
+let inventory = ["stick"]; // Inventarul jucătorului, inițializat cu un băț
 
-const button1 = document.querySelector("#button1");
-const button2 = document.querySelector("#button2");
-const button3 = document.querySelector("#button3");
-const text = document.querySelector("#text");
-const xpText = document.querySelector("#xpText");
-const healthText = document.querySelector("#healthText");
-const goldText = document.querySelector("#goldText");
-const monsterStats = document.querySelector("#monsterStats");
-const monsterName = document.querySelector("#monsterName");
-const monsterHealthText = document.querySelector("#monsterHealth");
+// Selecția elementelor DOM
+const button1 = document.querySelector("#button1"); // Butonul 1
+const button2 = document.querySelector("#button2"); // Butonul 2
+const button3 = document.querySelector("#button3"); // Butonul 3
+const text = document.querySelector("#text"); // Aria text
+const xpText = document.querySelector("#xpText"); // Afișajul pentru XP
+const healthText = document.querySelector("#healthText"); // Afișajul pentru viață
+const goldText = document.querySelector("#goldText"); // Afișajul pentru aur
+const monsterStats = document.querySelector("#monsterStats"); // Aria pentru statistici despre monștri
+const monsterName = document.querySelector("#monsterName"); // Afișajul pentru numele monștrului
+const monsterHealthText = document.querySelector("#monsterHealth"); // Afișajul pentru viața monștrului
+
+// Array-uri de arme, monștri și locații
+// Array de arme cu numele și puterea lor
 const weapons = [
 	{
 		name: "stick",
@@ -35,6 +40,7 @@ const weapons = [
 	}
 ];
 
+// Array de monștri cu numele, nivelul și viața lor
 const monsters = [
 	{
 		name: "Slime",
@@ -53,6 +59,7 @@ const monsters = [
 	}
 ];
 
+// Array de locații cu numele, textul butoanelor, funcțiile butoanelor și textul
 const locations = [
     {
     	name: "town square",
@@ -120,19 +127,24 @@ function update(location){
   text.innerHTML = location.text;
 }
 
+// Funcție pentru a merge în oraș
 function goTown() {
     update(locations[0]);
 }
 
+// Funcție pentru a merge la magazin
 function goStore() {
 	update(locations[1]);
 }
 
+// Funcție pentru a merge în peșteră
 function goCave() {
 	update(locations[2]);
 }
 
+// Funcție pentru a cumpăra viață
 function buyHealth() {
+  // Verifică dacă jucătorul are suficient aur
 	if (gold >= 10) {
 		gold -= 10;
 		health += 10;
@@ -143,7 +155,9 @@ function buyHealth() {
 	}
 }
 
+// Funcție pentru a cumpăra o armă
 function buyWeapon() {
+  // Verifică dacă jucătorul poate cumpăra o armă
 	if (currentWeapon < weapons.length - 1){
 		if (gold >= 30) {
 			gold -= 30;
@@ -163,6 +177,7 @@ function buyWeapon() {
 	}
 }
 
+// Funcție pentru a vinde o armă
 function sellWeapon() {
 	if (inventory.length > 1){
 		gold += 15;
@@ -176,6 +191,7 @@ function sellWeapon() {
 	}
 }
 
+// Funcție pentru a începe lupta
 function goFight() {
 	update(locations[3]);
 	monsterHealth = monsters[fighting].health;
@@ -184,6 +200,7 @@ function goFight() {
 	monsterHealthText.innerText = monsters[fighting].health;
 }
 
+// Funcții pentru a iniția lupte cu diferiți monștri
 function fightSlime() {
 	fighting = 0;
 	goFight()
@@ -199,6 +216,7 @@ function fightDragon() {
 	goFight()
 }
 
+// Funcția pentru a ataca monștrii
 function attack() {
 	text.innerText = "The " + monsters[fighting].name + " attacks.";
 	text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
@@ -228,20 +246,24 @@ function attack() {
   }
 }
 
+// Funcția pentru a obține puterea atacului monștrilor
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
   console.log(hit);
   return hit > 0 ? hit : 0; 
 }
 
+// Funcția pentru a verifica dacă jucătorul lovește monștrii
 function isMonsterHit() {
   return Math.random() > .2 || health < 20;
 }
 
+// Funcția pentru a evita atacurile monștrilor
 function dodge() {
 	text.innerText = "You dodge the attack from the " + monsters[fighting].name;
 }
 
+// Funcția pentru a trata înfrângerea monștrilor
 function defeatMonster() {
 	gold += Math.floor(monsters[fighting].level * 6.7);
 	xp += monsters[fighting].level;
@@ -250,14 +272,17 @@ function defeatMonster() {
 	update(locations[4]);
 }
 
+// Funcția pentru a trata pierderea jocului
 function lose() {
   update(locations[5]);
 }
 
+// Funcția pentru a trata victoria în joc
 function winGame() {
   update(locations[6]);
 }
 
+// Funcția pentru a reseta jocul
 function restart() {
   xp = 0;
   health = 100;
@@ -270,10 +295,12 @@ function restart() {
   goTown()
 }
 
+// Funcția pentru a afișa easter egg-ul
 function easterEgg() {
   update(locations[7]);
 }
 
+// Funcția pentru a selecta un număr în cadrul easter egg-ului
 function pick(guess) {
   const numbers = [];
   while (numbers.length < 10) {
@@ -298,6 +325,7 @@ function pick(guess) {
   }
 }
 
+// Funcții pentru a selecta numărul 2 sau 8 în cadrul easter egg-ului
 function pickTwo() {
   pick(2);
 }
