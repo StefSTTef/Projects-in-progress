@@ -438,12 +438,12 @@ nav .account {
 	border-radius: 5px 0px 0px 5px;
 	background-size: cover;
 	max-height: 460px;
+	max-width: 100%;
 }
 
 .garden-content {
 	padding: 0 20px;
 	text-align: start;
-	align-items: end;
 }
 
 .title {
@@ -1056,6 +1056,7 @@ map {
 	display: block;
 	font-weight: bold;
 	margin-bottom: 5px;
+	text-align: left;
 }
 
 .contact-form input,
